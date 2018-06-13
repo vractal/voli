@@ -1,3 +1,9 @@
 .idea/
 .voli/
 .activate
+db.sqlite3
+.coverage
+htmlcov/
+voli/__pycache__/
+voli/core/__pycache__/
+voli/core/migrations/__pycache__/

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
-    'voli.core'
+    'coverage',
+    'voli.core',
 ]
 
 MIDDLEWARE = [
