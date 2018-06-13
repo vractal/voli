@@ -17,5 +17,14 @@ class HomeTest(TestCase):
         self.assertTemplateUsed(self.response, 'home.html')
         
     def test_html(self):
-        self.assertContains(self.response, 'h1')
+        """ Html must contain required content"""
+        requirements = [('<section id="receitas"', 1),
+                        ]
+
+        for content, number in requirements:
+            with self.subTest(content=content, number=number):
+                self.assertContains(self.response, content, number)
         
+
+
+
