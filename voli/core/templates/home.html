@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
@@ -21,7 +21,29 @@
         </header>
 
         <section id="receitas" class="section column" >
+
             <div class="columns is-multiline">
+
+                {% if recipes %}
+                {% for recipe in recipes %}
+
+                    <div class="receita card column is-one-third">
+
+                        <div class="card-header">
+                            <a class="card-header-title" href="http://{{ recipe.origin_url }}">
+                                {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
+
+                            </a>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+                {% endif %}
 
             </div>
 

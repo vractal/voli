@@ -7,3 +7,5 @@ htmlcov/
 voli/__pycache__/
 voli/core/__pycache__/
 voli/core/migrations/__pycache__/
+voli/core/static/
+static/
