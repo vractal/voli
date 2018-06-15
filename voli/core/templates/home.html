@@ -20,37 +20,69 @@
 
         </header>
 
-        <section id="receitas" class="section column" >
+        <main>
 
-            <div class="columns is-multiline">
 
-                {% if recipes %}
-                {% for recipe in recipes %}
 
-                    <div class="receita card column is-one-third">
 
-                        <div class="card-header">
-                            <a class="card-header-title" href="http://{{ recipe.origin_url }}">
-                                {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
+            <section id="receitas" class="section column" >
 
-                            </a>
-                        </div>
+                <div class="columns is-multiline">
 
-                        <div class="card-footer">
-                            <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
-                        </div>
+                    {% if recipes %}
+                        {% for recipe in page_obj %}
 
-                    </div>
+                            <article class="recipe card column is-one-third">
 
-                {% endfor %}
-                {% endif %}
+                                <div class="card-header">
+                                    <a class="card-header-title" href="http://{{ recipe.origin_url }}">
+                                        {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
 
+                                    </a>
+                                </div>
+
+                                <div class="card-footer">
+                                    <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+                                </div>
+
+                            </article>
+
+                        {% endfor %}
+                    {% endif %}
+
+                </div>
+
+
+            <div class="pagination section ">
+                <span class="step-links container">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; Primeira</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                    {% endif %}
+
+                    <span class="current">
+
+                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                         <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                    {% endif %}
+                </span>
             </div>
 
 
 
 
-        </section>
+
+            </section>
+
+
+
+
+
+        </main>
 
 
 

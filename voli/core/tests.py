@@ -36,6 +36,8 @@ class HomeTest(TestCase):
         self.tag = Tag.objects.create(name="Comida")
         self.recipe = mommy.make('core.Recipe')
         self.recipe2 = mommy.make('core.Recipe')
+        self.recipe.tags.add(self.tag)
+        self.recipe2.tags.add(self.tag)
         self.response = self.client.get('/')
 
     def test_get(self):
@@ -53,15 +55,44 @@ class HomeTest(TestCase):
         self.recipes = self.response.context['recipes']
         self.assertIsInstance(self.recipes[0],type(self.recipe))
 
+
+    def test_context_has_tags_list(self):
+        """ Context must have 'recipes' entry with list of Recipe objects"""
+
+        self.tags = self.response.context['tags']
+        self.assertIsInstance(self.tags[0],type(self.tag))
+
+
+
     def test_html(self):
         """ Html must contain required content"""
         requirements = [('<section id="receitas"', 1),
-                        ('class="receita', 2) ]
+                        ('class="recipe', 2),
+                        ('<span class="tag">',2)]
         for content, number in requirements:
             with self.subTest(content=content, number=number):
                 self.assertContains(self.response, content, number)
 
+    def test_recipes_pagination_until_limit(self):
+        """ Must show one article per recipe in db (max to 20 per page)"""
+        Tag.objects.all().delete()
+        Recipe.objects.all().delete()
+        limit = 14
+        for number in range(0,(limit + 1),4):
+            while len(Recipe.objects.all()) < number:
+                mommy.make('core.Recipe', _fill_optional=True)
+                mommy.make('core.Recipe', _fill_optional=True)
+                mommy.make('core.Recipe', _fill_optional=True)
+                mommy.make('core.Recipe', _fill_optional=True)
+                response = self.client.get("/")
+                with self.subTest(msg="numbers below page limit", number=number):
+                    self.assertContains(response,'<article class="recipe',number)
+
+        with self.subTest(msg="Number beyond pagination limit - should show only {}".format(limit)):
+            mommy.make('core.Recipe', _fill_optional=True)
+            mommy.make('core.Recipe', _fill_optional=True)
+            response = self.client.get("/")
+            self.assertContains(response, '<article class="recipe', limit)
 
 
-
-
+# How to test if pagination is working as it should? (showing all instances and only once)
