@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from django import forms
 # Create your models here.
+
 
 
 class Tag(models.Model):
@@ -21,3 +23,12 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ["-saved_at"]
+
+
+
+
+
+
+class FilterByTag(forms.Form):
+    pass
+

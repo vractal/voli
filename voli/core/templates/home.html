@@ -15,35 +15,67 @@
             <div class="hero-body">
                 <div class="container has-text-centered">
                     <h1 class="title">Receitas</h1>
+
+                    <h2>{{ session_filter }}</h2>
+
                 </div>
             </div>
 
         </header>
 
-        <main>
+        <main class="columns">
+
+
+            <section id="tags" class="section column is-one-quarter">
+            {% if tags %}
+                <ul>
+                    <form action="/" method="post">
+                    {%  csrf_token %}
+                    {% for tag in tags %}
+
+                    <input  name="tag" value="{{ tag }}" type="checkbox">  {{ tag }}<br>
+
+                    {% endfor %}
+                        <button class="tag is-large" type="submit">Filtrar</button>
+                    </form>
+
+                        </ul>
 
 
 
 
-            <section id="receitas" class="section column" >
+            {% endif %}
+
+            </section>
+
+            <section id="receitas" class="section column is-three-quarters" >
 
                 <div class="columns is-multiline">
 
                     {% if recipes %}
                         {% for recipe in page_obj %}
 
-                            <article class="recipe card column is-one-third">
+                            <article class="recipe column is-one-third">
+                                <div class="card">
 
-                                <div class="card-header">
-                                    <a class="card-header-title" href="http://{{ recipe.origin_url }}">
-                                        {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
+                                    <div class="card-header">
+                                        <a class="card-header-title" href="http://{{ recipe.origin_url }}">
+                                            {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
 
-                                    </a>
+                                        </a>
+                                    </div>
+
+                                    {% if recipe.tags.all %}
+
+                                        <div class="card-footer">
+                                            <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+                                        </div>
+
+
+                                    {% endif %}
+
                                 </div>
 
-                                <div class="card-footer">
-                                    <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
-                                </div>
 
                             </article>
 
@@ -53,7 +85,7 @@
                 </div>
 
 
-            <div class="pagination section ">
+                <div class="pagination section ">
                 <span class="step-links container">
                     {% if page_obj.has_previous %}
                         <a href="?page=1">&laquo; Primeira</a>
@@ -67,16 +99,17 @@
 
                     {% if page_obj.has_next %}
                         <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
-                         <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
                     {% endif %}
                 </span>
-            </div>
+                </div>
 
 
 
 
 
             </section>
+
 
 
 

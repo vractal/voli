@@ -34,6 +34,7 @@ class HomeTest(TestCase):
 
     def setUp(self):
         self.tag = Tag.objects.create(name="Comida")
+        self.tag2 = Tag.objects.create(name="Batata")
         self.recipe = mommy.make('core.Recipe')
         self.recipe2 = mommy.make('core.Recipe')
         self.recipe.tags.add(self.tag)
@@ -68,7 +69,10 @@ class HomeTest(TestCase):
         """ Html must contain required content"""
         requirements = [('<section id="receitas"', 1),
                         ('class="recipe', 2),
-                        ('<span class="tag">',2)]
+                        ('<span class="tag">',2),
+                        ('section id="tags',1),
+                        ('<li><a class="tag',2)]
+
         for content, number in requirements:
             with self.subTest(content=content, number=number):
                 self.assertContains(self.response, content, number)
@@ -94,5 +98,16 @@ class HomeTest(TestCase):
             response = self.client.get("/")
             self.assertContains(response, '<article class="recipe', limit)
 
-
 # How to test if pagination is working as it should? (showing all instances and only once)
+
+    def test_post(self):
+        Tag.objects.all().delete()
+        Recipe.objects.all().delete()
+        tag = Tag.objects.create(name="Comida")
+        recipe = mommy.make('core.Recipe')
+        recipe2 = mommy.make('core.Recipe')
+        recipe.tags.add(tag)
+        post_resp = self.client.post("/",data={'tags':'comida'})
+        recipes = post_resp.context['recipes']
+        self.assertEqual(len(recipes),len(tag.recipes.all()))
+        self.assertIsInstance(recipes[0],recipe)
