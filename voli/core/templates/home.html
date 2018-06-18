@@ -16,8 +16,6 @@
                 <div class="container has-text-centered">
                     <h1 class="title">Receitas</h1>
 
-                    <h2>{{ session_filter }}</h2>
-
                 </div>
             </div>
 
@@ -26,22 +24,29 @@
         <main class="columns">
 
 
-            <section id="tags" class="section column is-one-quarter">
+            <section id="tags" class="section column is-one-quarter ">
             {% if tags %}
-                <ul>
+                <h2>Filtrar por tags:</h2>
+                <br>
+
                     <form action="/" method="post">
+                    <ul>
                     {%  csrf_token %}
                     {% for tag in tags %}
-
-                    <input  name="tag" value="{{ tag }}" type="checkbox">  {{ tag }}<br>
-
+                        <li>
+                        <input id="tag-{{ tag }}" name="tag" value="{{ tag }}" type="checkbox"
+                        {% if tag.name in request.session.session_filter %}checked{% endif %}/>
+                        <label for="tag-{{ tag }}">#{{ tag }}</label>
+                        </li>
                     {% endfor %}
-                        <button class="tag is-large" type="submit">Filtrar</button>
+                    </ul>
+                    <div class="buttons has-addons">
+                        <button class="button is-danger" type="submit">Filtrar</button>
+                        <button class="button" name="clear" value="clear" type="submit">Limpar</button>
+
+                    </div>
+
                     </form>
-
-                        </ul>
-
-
 
 
             {% endif %}
@@ -58,21 +63,27 @@
                             <article class="recipe column is-one-third">
                                 <div class="card">
 
-                                    <div class="card-header">
+                                    <div class="card-header ">
                                         <a class="card-header-title" href="http://{{ recipe.origin_url }}">
                                             {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
 
                                         </a>
                                     </div>
 
-                                    {% if recipe.tags.all %}
 
                                         <div class="card-footer">
-                                            <div class="card-footer-item tags">{% for tag in  recipe.tags.all %}<span class="tag">{{ tag }}</span>{% endfor %}</div>
+                                            <div class="card-footer-item tags">
+                                                {% for tag in  recipe.tags.all %}
+                                                    <span class="tag is-danger">{{ tag }}</span>
+                                                {% endfor %}
+                                                {% if not recipe.tags.all %}
+                                                    <span class="tag is-dark">Sem Tag</span>
+                                                {% endif %}
+
+
+                                            </div>
                                         </div>
 
-
-                                    {% endif %}
 
                                 </div>
 

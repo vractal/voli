@@ -1,0 +1,35 @@
+.card-header-title {
+    overflow: hidden;
+
+}
+
+.recipe .card {
+    height: 100%;
+}
+
+
+#tags {
+    padding: 50px;
+    font-size: 20px;
+}
+
+#tags .buttons {
+    padding: 30px 10px ;
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+
+}
+
+label {
+    cursor: pointer;
+}
+
+[type="checkbox"]:checked + label {
+
+    color: #ff3860;
+    font-size: 22px;
+    font-style: italic;
+
+}
