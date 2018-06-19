@@ -69,9 +69,9 @@ class HomeTest(TestCase):
         """ Html must contain required content"""
         requirements = [('<section id="receitas"', 1),
                         ('class="recipe', 2),
-                        ('<span class="tag">',2),
+                        ('<input id="tag',2),
                         ('section id="tags',1),
-                        ('<li><a class="tag',2)]
+                        ('<span class="tag',2)]
 
         for content, number in requirements:
             with self.subTest(content=content, number=number):
@@ -106,8 +106,11 @@ class HomeTest(TestCase):
         tag = Tag.objects.create(name="Comida")
         recipe = mommy.make('core.Recipe')
         recipe2 = mommy.make('core.Recipe')
+        recipe3 = mommy.make('core.Recipe')
         recipe.tags.add(tag)
-        post_resp = self.client.post("/",data={'tags':'comida'})
+        recipe2.tags.add(tag)
+        post_resp = self.client.post("/",data={'tag':'Comida'})
         recipes = post_resp.context['recipes']
         self.assertEqual(len(recipes),len(tag.recipes.all()))
-        self.assertIsInstance(recipes[0],recipe)
+
+
