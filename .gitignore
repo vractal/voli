@@ -7,4 +7,7 @@ htmlcov/
 voli/__pycache__/
 voli/core/__pycache__/
 voli/core/migrations/__pycache__/
+voli/telebot/__pycache__/
+voli/telebot/management/commands/__pycache__/
 static/
+voli/telebot/token.py

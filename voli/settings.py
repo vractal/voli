@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'coverage',
     'voli.core',
+    'voli.telebot',
 ]
 
 MIDDLEWARE = [

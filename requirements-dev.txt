@@ -1,6 +1,7 @@
 backcall==0.1.0
 bleach==2.1.3
 certifi==2018.4.16
+coverage==4.5.1
 decorator==4.3.0
 Django==2.0.6
 django-extensions==2.0.7
@@ -18,6 +19,7 @@ jupyter-client==5.2.3
 jupyter-core==4.4.0
 MarkupSafe==1.0
 mistune==0.8.3
+model-mommy==1.6.0
 nbconvert==5.3.1
 nbformat==4.4.0
 notebook==5.5.0
@@ -39,6 +41,7 @@ terminado==0.8.1
 testpath==0.3.1
 tornado==5.0.2
 traitlets==4.3.2
+vidcutter==5.5.0
 wcwidth==0.1.7
 webencodings==0.5.1
 widgetsnbextension==3.2.1
