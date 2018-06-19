@@ -25,7 +25,8 @@ SECRET_KEY = 'kz1auuy9)xs&6efc4%zrb)8kse#ucl0#jyi(vdnn3rhk%u$@61'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fractopia.org',
+                 'voli.fractopia.org']
 
 
 # Application definition
