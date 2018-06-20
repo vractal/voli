@@ -115,3 +115,38 @@ aside#tags.navbar-menu.is-active {
     overflow: hidden;
 
 }
+
+@media only screen and (max-width: 460px){
+
+    aside#tags div.menu .buttons {
+        top:90px;
+        left: 50%;
+        min-width: 150px;
+        transform: translate(-50%, 0);
+
+    }
+
+    .menu-label {
+        text-align: center;
+    }
+    aside#tags.navbar-menu.is-active {
+            padding: 50px 100px;
+        }
+
+
+}
+
+
+@media only screen and (max-width: 400px){
+
+        aside#tags.navbar-menu.is-active {
+            padding: 30px 14%;
+        }
+
+
+        aside#tags div.menu .buttons {
+        top:70px;
+
+
+    }
+}
