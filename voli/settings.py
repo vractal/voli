@@ -25,8 +25,8 @@ SECRET_KEY = 'kz1auuy9)xs&6efc4%zrb)8kse#ucl0#jyi(vdnn3rhk%u$@61'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['fractopia.org',
-                 'voli.fractopia.org']
+ALLOWED_HOSTS = ['localhost',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'voli.core',
     'voli.telebot',
+    'django_extensions',
+    'coverage',
 ]
 
 MIDDLEWARE = [
