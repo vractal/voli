@@ -11,6 +11,8 @@
 #tags {
     padding: 50px;
     font-size: 20px;
+
+
 }
 
 
@@ -68,7 +70,8 @@ aside#tags.navbar-menu.is-active {
 
 .hero .navbar {
     width: 100%;
-    background-image: linear-gradient(141deg, #ff0561 0%, #ff3860 71%, #ff5257 100%);
+    /*background-image: linear-gradient(141deg, #ff0561 0%, #ff3860 71%, #ff5257 100%);*/
+    background-color: #ff3860;
     position: fixed;
     z-index: 25;
 }
@@ -90,6 +93,8 @@ aside#tags.navbar-menu.is-active {
     /*width: 100%;*/
 /*}*/
 
+
+
 .hero div.navbar.is-active {
     position: fixed;
     background: #ff3860;
@@ -110,9 +115,24 @@ aside#tags.navbar-menu.is-active {
     font-style: italic;
 
 }
+
 .disable-scroll {
     height: 100px;
     overflow: hidden;
+
+
+}
+
+section#receitas {
+    margin: 0 auto;
+}
+span.step-links {
+    margin: 0 auto;
+}
+
+.step-links span.button.current:hover {
+    background-color: white;
+    color: #ff3860;
 
 }
 
@@ -148,5 +168,12 @@ aside#tags.navbar-menu.is-active {
         top:70px;
 
 
+    }
+}
+
+@media only screen and (max-width: 290px){
+
+    section#receitas {
+        padding-left: 4px;
     }
 }

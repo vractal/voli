@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <title>Receitas</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css">
+        <link rel="stylesheet" href={% static 'css/reset.css' %} >
         <link rel="stylesheet" href={% static 'css/style.css' %} >
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -16,7 +17,7 @@
     <body>
 
 
-        <header class="hero is-danger is-medium is-bold">
+        <header class="hero is-danger is-medium ">
 
             <div class="navbar">
 
@@ -78,7 +79,7 @@
         </header>
 
 
-        <main class="columns">
+        <main class="columns is-centered">
 
 
             <section id="tags" class="section column is-one-quarter is-hidden-touch">
@@ -91,9 +92,9 @@
                     {%  csrf_token %}
                     {% for tag in tags %}
                         <li>
-                        <input id="tag-{{ tag }}" name="tag" value="{{ tag }}" type="checkbox"
+                        <input id="tag2-{{ tag }}" name="tag" value="{{ tag }}" type="checkbox"
                         {% if tag.name in request.session.session_filter %}checked{% endif %}/>
-                        <label for="tag-{{ tag }}">#{{ tag }}</label>
+                        <label for="tag2-{{ tag }}">#{{ tag }}</label>
                         </li>
                     {% endfor %}
                     </ul>
@@ -110,18 +111,18 @@
 
             </section>
 
-            <section id="receitas" class="section column is-three-quarters" >
+            <section id="receitas" class="section column is-11-touch is-three-quarters-desktop" >
 
-                <div class="columns is-multiline">
+                <div class="columns is-mobile is-centered is-multiline">
 
                     {% if recipes %}
                         {% for recipe in page_obj %}
 
-                            <article class="recipe column is-one-third">
+                            <article class="recipe column is-12-mobile is-6-tablet is-4-desktop">
                                 <div class="card">
 
                                     <div class="card-header ">
-                                        <a class="card-header-title" href="http://{{ recipe.origin_url }}">
+                                        <a class="card-header-title" href="{{ recipe.origin_url }}">
                                             {% if recipe.name %}{{ recipe.name }}{% else %} {{ recipe.origin_url}}{% endif %}
 
                                         </a>
@@ -131,10 +132,10 @@
                                         <div class="card-footer">
                                             <div class="card-footer-item tags">
                                                 {% for tag in  recipe.tags.all %}
-                                                    <span class="tag is-danger">{{ tag }}</span>
+                                                    <span class="tag is-warning">{{ tag }}</span>
                                                 {% endfor %}
                                                 {% if not recipe.tags.all %}
-                                                    <span class="tag is-dark">Sem Tag</span>
+                                                    <span class="tag is-light" >Sem Tags</span>
                                                 {% endif %}
 
 
@@ -148,28 +149,44 @@
                             </article>
 
                         {% endfor %}
-                    {% endif %}
+                    {% else %}
+                        <div class="column is-11 has-text-centered no-results">
+
+                            <br><br><br><br>
+                            <p>Parece que não existe nenhuma receita com esse filtro.</p>
+                            <br><br><br><br>
+                        </div>
+                {% endif %}
 
                 </div>
 
 
-                <div class="pagination section ">
-                <span class="step-links container">
+                <div class="pagination section">
+                <span class="step-links ">
+                    <div class="buttons has-addons">
                     {% if page_obj.has_previous %}
-                        <a href="?page=1">&laquo; Primeira</a>
-                        <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+
+
+                        <a class="button is-rounded is-outlined is-danger" href="?page={{ page_obj.previous_page_number }}">&laquo; {{ page_obj.previous_page_number }}</a>
+                    {% else %}
+                        <a class="button is-rounded is-danger is-outlined" disabled>&laquo;  </a>
                     {% endif %}
 
-                    <span class="current">
+                    <span class="button is-rounded is-outlined current is-danger" style="cursor: inherit;">
 
-                        Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
                     </span>
 
                     {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                        <a class="button is-rounded is-danger is-outlined" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }} &raquo;</a>
+                    {% else %}
+                        <a class="button is-rounded is-danger is-outlined" disabled>  &raquo;</a>
                     {% endif %}
+
+
+                  </div>
                 </span>
+
                 </div>
 
 
