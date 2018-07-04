@@ -4,10 +4,10 @@
 
 A Voli é um agregador de receitas que se propõe a não ficar no caminho entre você e sua comida. Oferecendo uma interface minimalista para visualizar e salvar receitas e  um bot de Telegram, suas receitas estão sempre a mão.
 
-Outras caracterisicas relevantes:
+Outras características relevantes:
 
-- Serviço self-hosted.
-- Proposta de comunicação entre as diferentes instancias (federação).
+- Serviço self-hosted
+- Proposta de comunicação entre as diferentes instâncias (federação)
 - Desenvolvido em Python + Django
 
 ### Funcionalidades (road map)
@@ -19,9 +19,10 @@ Outras caracterisicas relevantes:
 - Adicionar receitas diretamente (sem um link)
 - Extrair (Scrapy) informações de receitas adicionadas com link
 - Melhorar interface do Bot com teclados modificados
-- Criar bot inline para enviar receitas à amigos rapidamente sem sair da conversa
+- Criar bot inline para buscar e enviar receitas a amigos sem sair da conversa
 - Extrair ingredientes e quantidades das receitas
 - Apresentar informações nutricionais sobre ingredientes
+- Estimar informaçoes nutricionais das receitas e custo
 
 ### Colabore
 
@@ -47,7 +48,7 @@ $ pip install -r requirements-dev.txt
 # Criar o schema do banco de dados
 $ python manage.py migrate
 
-# Criar a variavel "token" dentro do app telebot
+# Criar a variável "token" dentro do app do bot
 # Substitua '<token>' por seu token, mantendo o resto.
 $ echo token=\"<token>\" > voli/telebot/token.py
 
