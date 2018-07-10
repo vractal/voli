@@ -69,7 +69,6 @@ class HomeTest(TestCase):
         """ Html must contain required content"""
         requirements = [('<section id="receitas"', 1),
                         ('class="recipe', 2),
-                        ('<input id="tag',2),
                         ('section id="tags',1),
                         ('<span class="tag',2)]
 
