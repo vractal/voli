@@ -15,6 +15,7 @@ Outras características relevantes:
 - (OK) Adicionar links de receitas através do bot no telegram ou site, opcionalmente com nome e tags
 - (OK) Página responsiva para visualizar as receitas
 - (OK) Filtrar receitas salvas por tags
+- Mudança na estrutura do projeto: API REST + REACT
 - Campo de pesquisa na página
 - Adicionar receitas diretamente (sem um link)
 - Extrair (Scrapy) informações de receitas adicionadas com link
